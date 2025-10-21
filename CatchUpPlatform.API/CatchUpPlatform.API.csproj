@@ -23,4 +23,9 @@
         <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="9.0.6"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Shared\Domain\" />
+      <Folder Include="Shared\Interfaces\" />
+    </ItemGroup>
+
 </Project>
