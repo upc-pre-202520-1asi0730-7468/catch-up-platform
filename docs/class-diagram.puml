@@ -97,7 +97,7 @@ package "News" {
     }
   }
 
-  package "Infrastructure.Repositories" {
+  package "Infrastructure.Persistence.EFC.Repositories" {
     class FavoriteSourceRepository {
       +FindByNewsApiKeyAsync(string) : Task<IEnumerable<FavoriteSource>>
       +FindByNewsApiKeyAndSourceIdAsync(string, string) : Task<FavoriteSource?>
