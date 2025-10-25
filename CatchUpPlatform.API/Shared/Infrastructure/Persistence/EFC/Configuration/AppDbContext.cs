@@ -22,7 +22,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         builder.Entity<FavoriteSource>().Property(f => f.NewsApiKey).IsRequired();
         builder.Entity<FavoriteSource>().Property(f => f.SourceId).IsRequired();
         builder.Entity<FavoriteSource>().HasIndex(f => f.NewsApiKey);
-        builder.Entity<FavoriteSource>().HasIndex(f => f.NewsApiKey + f.SourceId).IsUnique();
+        builder.Entity<FavoriteSource>().HasIndex(f => new {f.NewsApiKey, f.SourceId}).IsUnique();
         
         builder.UseSnakeCaseNamingConvention();
     }
