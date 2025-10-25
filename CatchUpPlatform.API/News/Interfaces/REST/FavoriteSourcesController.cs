@@ -80,6 +80,7 @@ public class FavoriteSourcesController(
         return Ok(resources);
     }
 
+    [HttpGet]
     [SwaggerOperation(
         Summary = "Gets favorite sources by NewsApiKey and optional SourceId",
         Description = "Gets favorite sources for a given NewsApiKey and optional SourceId",
