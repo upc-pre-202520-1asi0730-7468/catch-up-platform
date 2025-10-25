@@ -1,3 +1,4 @@
+using CatchUpPlatform.API.News.Domain.Model.Aggregates;
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,14 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+
+        builder.Entity<FavoriteSource>().HasKey(f => f.Id);
+        builder.Entity<FavoriteSource>().Property(f => f.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<FavoriteSource>().Property(f => f.NewsApiKey).IsRequired();
+        builder.Entity<FavoriteSource>().Property(f => f.SourceId).IsRequired();
+        builder.Entity<FavoriteSource>().HasIndex(f => f.NewsApiKey);
+        builder.Entity<FavoriteSource>().HasIndex(f => f.NewsApiKey + f.SourceId).IsUnique();
+        
         builder.UseSnakeCaseNamingConvention();
     }
 }
