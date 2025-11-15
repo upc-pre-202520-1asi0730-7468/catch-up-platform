@@ -1,10 +1,10 @@
 ﻿# Dockerfile for catch-up-platform
 # Summary:
-# This Dockerfile builds and run the catch-up-platform application using Microsoft .NET SDK 9.0.
+# This Dockerfile builds and runs the catch-up-platform application using Microsoft .NET SDK 9.0.
 # Description:
 # This Dockerfile is designed to build an ASP.NET Core application using .NET SDK and run it in a lightweight
 # ASP.NET Core 9.0 environment. It uses a multi-stage build to keep the final image size small by separating the build
-# and runtime environments. It sets the active profile to 'Production' for production.
+# and runtime environments. The application runs in the Production environment.
 # Version: 1.0
 # Maintainer: Web Applications Development Team
 
@@ -19,8 +19,10 @@ RUN dotnet publish ./CatchUpPlatform.API -c Release -o out
 # Final stage: runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
+ENV ASPNETCORE_ENVIRONMENT=Production
 COPY --from=builder /app/out .
 EXPOSE 80
+# The application listens on port 80 by default
 ENTRYPOINT ["dotnet", "CatchUpPlatform.API.dll"]
 
 # It is necessary to define the following environment variables in the hosting provider for the application to
